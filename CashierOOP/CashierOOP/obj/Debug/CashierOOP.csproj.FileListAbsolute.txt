@@ -1,0 +1,8 @@
+C:\Users\ASUS\source\repos\CashierOOP\CashierOOP\bin\Debug\CashierOOP.exe.config
+C:\Users\ASUS\source\repos\CashierOOP\CashierOOP\bin\Debug\CashierOOP.exe
+C:\Users\ASUS\source\repos\CashierOOP\CashierOOP\bin\Debug\CashierOOP.pdb
+C:\Users\ASUS\source\repos\CashierOOP\CashierOOP\obj\Debug\CashierOOP.csproj.AssemblyReference.cache
+C:\Users\ASUS\source\repos\CashierOOP\CashierOOP\obj\Debug\CashierOOP.csproj.SuggestedBindingRedirects.cache
+C:\Users\ASUS\source\repos\CashierOOP\CashierOOP\obj\Debug\CashierOOP.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\CashierOOP\CashierOOP\obj\Debug\CashierOOP.exe
+C:\Users\ASUS\source\repos\CashierOOP\CashierOOP\obj\Debug\CashierOOP.pdb
