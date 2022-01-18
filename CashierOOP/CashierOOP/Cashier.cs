@@ -19,7 +19,7 @@ namespace CashierOOP
 
             foreach (var transaction in transactions)
             {
-                Console.WriteLine("|{0,-5}|{1,-13}|{2,-13}|{3,-15}|{4,-15}|{5,-8}|{6,-17}|", (no + 1), transaction.IdTransaction, transaction.IdItem, Capitalize(transaction.Name), $"Rp. {FormatNominal(transaction.Price)}", transaction.Quantity, $"Rp. {FormatNominal(transaction.Total)}");
+                Console.WriteLine("|{0,-5}|{1,-13}|{2,-13}|{3,-15}|{4,-15}|{5,-8}|{6,-17}|", (no + 1), transaction.IdTransaction, transaction.IdItem, transaction.Name, $"Rp. {Utils.FormatNominal(transaction.Price)}", transaction.Quantity, $"Rp. {Utils.FormatNominal(transaction.Total)}");
                 no++;
             }
             Console.WriteLine("---------------------------------------------------------------------------------------------");

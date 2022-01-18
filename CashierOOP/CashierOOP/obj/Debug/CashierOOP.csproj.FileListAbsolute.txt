@@ -6,3 +6,11 @@ C:\Users\ASUS\source\repos\CashierOOP\CashierOOP\obj\Debug\CashierOOP.csproj.Sug
 C:\Users\ASUS\source\repos\CashierOOP\CashierOOP\obj\Debug\CashierOOP.csproj.CoreCompileInputs.cache
 C:\Users\ASUS\source\repos\CashierOOP\CashierOOP\obj\Debug\CashierOOP.exe
 C:\Users\ASUS\source\repos\CashierOOP\CashierOOP\obj\Debug\CashierOOP.pdb
+C:\Users\ASUS\Documents\GitHub\ElectronicShopCashier-OOP_MCC\CashierOOP\CashierOOP\bin\Debug\CashierOOP.exe.config
+C:\Users\ASUS\Documents\GitHub\ElectronicShopCashier-OOP_MCC\CashierOOP\CashierOOP\bin\Debug\CashierOOP.exe
+C:\Users\ASUS\Documents\GitHub\ElectronicShopCashier-OOP_MCC\CashierOOP\CashierOOP\bin\Debug\CashierOOP.pdb
+C:\Users\ASUS\Documents\GitHub\ElectronicShopCashier-OOP_MCC\CashierOOP\CashierOOP\obj\Debug\CashierOOP.csproj.AssemblyReference.cache
+C:\Users\ASUS\Documents\GitHub\ElectronicShopCashier-OOP_MCC\CashierOOP\CashierOOP\obj\Debug\CashierOOP.csproj.SuggestedBindingRedirects.cache
+C:\Users\ASUS\Documents\GitHub\ElectronicShopCashier-OOP_MCC\CashierOOP\CashierOOP\obj\Debug\CashierOOP.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\Documents\GitHub\ElectronicShopCashier-OOP_MCC\CashierOOP\CashierOOP\obj\Debug\CashierOOP.exe
+C:\Users\ASUS\Documents\GitHub\ElectronicShopCashier-OOP_MCC\CashierOOP\CashierOOP\obj\Debug\CashierOOP.pdb

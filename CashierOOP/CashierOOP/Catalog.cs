@@ -19,160 +19,160 @@ namespace CashierOOP
             Console.WriteLine("--------------------------------------------------------------------");
             foreach (var item in items)
             {
-                Console.WriteLine("|{0,-5}|{1,-13}|{2,-23}|{3,-15}|{4,-6}|", (no+1), item.IdItem , Capitalize(item.NameItem), $"Rp. {FormatNominal(item.PriceItem)}", item.StockItem);
+                Console.WriteLine("|{0,-5}|{1,-13}|{2,-23}|{3,-15}|{4,-6}|", (no+1), item.IdItem , item.NameItem, $"Rp. {Utils.FormatNominal(item.PriceItem)}", item.StockItem);
                 no++;
             }
             Console.WriteLine("--------------------------------------------------------------------");
         }
 
-        private void TableFormat(string id, string name, int price, int stock)
+        public void AddItem()
         {
 
-            Console.WriteLine("--------------------------------------------------------------------");
-            Console.WriteLine("|{0,-13}|{1,-23}|{2,-15}|{3,-6}|", "Id Item", "Name", "Price", "Stock");
-            Console.WriteLine("--------------------------------------------------------------------");
-            Console.WriteLine("|{0,-13}|{1,-23}|{3,-15}|{3,-6}|", id, Capitalize(name), $"Rp. {FormatNominal(price)}", stock);
-            Console.WriteLine("--------------------------------------------------------------------");
-        }
+            Console.Write("Id Item      : ");
+            string idItem = Utils.GetEmptyStringAlert(Console.ReadLine().ToLower().Trim(), "Id Item      : ");
 
-        public void AddItem(Item item)
-        {
+            Console.Write("Name Item    : ");
+            string nameItem = Utils.GetEmptyStringAlert(Console.ReadLine().ToLower().Trim(), "Name Item    : ");
+
+            Console.Write("Price Item   : ");
+            int priceItem = Convert.ToInt32(Console.ReadLine());
+            int price = Utils.InputLessZeroAlert(priceItem, "Price Item   : ");
+
+            Console.Write("Stock Item   : ");
+            int stockItem = Convert.ToInt32(Console.ReadLine());
+            int stock = Utils.InputLessZeroAlert(stockItem, "Stock Item   : ");
+
+            var item = new Item(idItem, nameItem, price, stock);
             _items.Add(item);
+            Utils.GetMessageAlert(ConsoleColor.Green, "Record has been added");
         }
 
         public void DisplayAllitem()
         {
+            Console.WriteLine("List Item");
             int itemLength = _items.Count;
             if (itemLength != 0)
             {
+                Console.WriteLine("Amount of data : {0}", itemLength);
                 GetAllItem(_items);
             }
             else
             {
-                GetMessage(ConsoleColor.Yellow, "Record is empty");
+                Utils.GetMessageAlert(ConsoleColor.Yellow, "Record is empty");
             }
         }
 
-        public void UpdateItem(string id)
+        public void SearchItem()
         {
-            var item = _items.FirstOrDefault(x => x.IdItem == id);
-            if (item == null)
+            int lengthList = _items.Count();
+            if (lengthList == 0)
             {
-                Console.WriteLine("Record not found");
+                Utils.GetMessageAlert(ConsoleColor.Yellow, "Record is empty");
             }
             else
             {
-                TableFormat(item.IdItem, item.NameItem, item.PriceItem, item.StockItem);
-                Console.Write("Update Name : ");
-                string nameUpdate = StringInputAlert(Console.ReadLine(), "Name cannot be empty", "Update Name : ");
+                Console.Write("Search By Name : ");
+                string inputIdItem = Console.ReadLine().ToLower();
+                var isItemMatching = _items.Where(x => x.NameItem.Contains(inputIdItem)).ToList();
 
-
-
-                Console.Write("Update Price : ");
-                int priceUpdate = Convert.ToInt32(Console.ReadLine());
-                int priceUpdateNew = InputLessZeroAlert(priceUpdate, "Update Price : ");
-
-                Console.Write("Update Stock : ");
-                int stockUpdate = Convert.ToInt32(Console.ReadLine());
-                int stockUpdateNew = InputLessZeroAlert(stockUpdate, "Update Stock : ");
-
-                item.NameItem = nameUpdate;
-                item.PriceItem = priceUpdateNew;
-                item.StockItem = stockUpdateNew;
-                GetMessage(ConsoleColor.Green, "Record updated successfully");
-                TableFormat(item.IdItem, item.NameItem, item.PriceItem, item.StockItem);
+                if ((string.IsNullOrEmpty(inputIdItem)) || string.IsNullOrWhiteSpace(inputIdItem))
+                {
+                    Utils.GetMessageAlert(ConsoleColor.Red, "Input is invalid");
+                }
+                else
+                {
+                    GetAllItem(isItemMatching);
+                }
             }
         }
 
-        public void DeleteItem(string id)
+        public void UpdateItem()
         {
-            
-            var item = _items.FirstOrDefault(i => i.IdItem == id);
-            if (item == null)
+            int lengthList = _items.Count();
+            if (lengthList == 0)
             {
-                Console.WriteLine("Record not found");
+                Utils.GetMessageAlert(ConsoleColor.Yellow, "Record is empty");
             }
             else
             {
-                Console.WriteLine("Are you sure to delete this record");
-                TableFormat(item.IdItem, item.NameItem, item.PriceItem, item.StockItem);
-                //Console.WriteLine($"{item.IdItem} {item.NameItem} Rp. {FormatNominal(item.PriceItem)} {item.StockItem}");
-                Console.WriteLine("Press y / n ");
-                string choose = Console.ReadLine().ToUpper().Trim(); 
-                switch(choose)
+                Console.Clear();
+                Console.WriteLine("Update Item");
+                DisplayAllitem();
+                for (int i = 0; i <= _items.Count() - 1; i++)
                 {
-                    case "Y":
-                        _items.Remove(item);
-                        GetMessage(ConsoleColor.Green, "Record deleted successfully");
-                        break;
-                    case "N":
-                        GetMessage(ConsoleColor.Red, "Record failed to delete");
-                        break;
-                    default:
-                        GetMessage(ConsoleColor.Red, "Invalid input");
-                        break;
-                } 
-            }
-        }
+                    Item item1 = _items[i];
+                    Console.Write("Enter Id Item : ");
+                    string idItem = Console.ReadLine();
+                    if (idItem == item1.IdItem)
+                    {
+                       
+                        Console.Write("Update Name : ");
+                        string nameUpdate = Utils.StringInputAlert(Console.ReadLine(), "Name item cannot be empty", "Update Name : ");
 
-        public static string FormatNominal(int number)
-        {
-            return number.ToString("#,##0");
-        }
-        public static string Capitalize(string word)
-        {
-            return word.Substring(0, 1).ToUpper() + word.Substring(1).ToLower();
-        }
+                        Console.Write("Update Price : ");
+                        int priceUpdate = Convert.ToInt32(Console.ReadLine());
+                        int priceUpdateNew = Utils.InputLessZeroAlert(priceUpdate, "Update Price : ");
 
-        // alert int in zero condition
-        public static int InputLessZeroAlert(int input, string msg)
-        {
-            while (input <= 0)
-            {
-                try
-                {
-                    input = Convert.ToInt32(Console.ReadLine());
-                }
-                catch (FormatException e)
-                {
-                    GetMessage(ConsoleColor.Red, "Inputan bukan angka atau kosong", msg);
-                    continue;
+                        Console.Write("Update Stock : ");
+                        int stockUpdate = Convert.ToInt32(Console.ReadLine());
+                        int stockUpdateNew = Utils.InputLessZeroAlert(stockUpdate, "Update Stock : ");
+
+                        item1.NameItem = nameUpdate;
+                        item1.PriceItem = priceUpdateNew;
+                        item1.StockItem = stockUpdateNew;
+                        Utils.TableFormat(item1.IdItem, item1.NameItem, item1.PriceItem, item1.StockItem);
+                        Utils.GetMessageAlert(ConsoleColor.Green, "Record updated successfully");
+                    }
+                    else
+                    {
+                        Utils.GetMessageAlert(ConsoleColor.Red, "Id not found!");
+                        Console.ReadKey();
+                    }
                 }
             }
-
-            return input;
         }
 
-        public static void GetMessage(ConsoleColor color, string message1)
+        public void DeleteItem()
         {
-            Console.ForegroundColor = color;
-            Console.WriteLine(message1);
-            Console.ResetColor();
-        }
-
-        public static void GetMessage(ConsoleColor color, string message1, string message2)
-        {
-            Console.ForegroundColor = color;
-            Console.WriteLine(message1);
-            Console.ResetColor();
-            Console.Write(message2);
-        }
-
-        public static string StringInputAlert(string stringInput, string msg, string msg2)
-        {
-            while ((string.IsNullOrEmpty(stringInput)) || string.IsNullOrWhiteSpace(stringInput))
+            int lengthList = _items.Count();
+            if (lengthList == 0)
             {
-                GetMessage(ConsoleColor.Red, msg, msg2);
-                stringInput = Console.ReadLine();
+                Utils.GetMessageAlert(ConsoleColor.Yellow, "Record is empty");
             }
-            return stringInput;
-        }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Delete Item");
+                DisplayAllitem();
+                Console.Write("Enter Id Item : ");
+                string id = Console.ReadLine().Trim().ToLower();
 
-        public void itemLength()
-        {
-            var item = _items.Count();
-            Console.WriteLine(item);
+                var item = _items.FirstOrDefault(i => i.IdItem == id);
+                if (item == null)
+                {
+                    Console.WriteLine("Record not found");
+                }
+                else
+                {
+                    Console.WriteLine("Are you sure to delete this record");
+                    Utils.TableFormat(item.IdItem, item.NameItem, item.PriceItem, item.StockItem);
+                    Console.Write("Press y / n : ");
+                    string choose = Console.ReadLine().ToUpper().Trim();
+                    switch (choose)
+                    {
+                        case "Y":
+                            _items.Remove(item);
+                            Utils.GetMessageAlert(ConsoleColor.Green, "Record deleted successfully");
+                            break;
+                        case "N":
+                            Utils.GetMessageAlert(ConsoleColor.Red, "Record failed to delete");
+                            break;
+                        default:
+                            Utils.GetMessageAlert(ConsoleColor.Red, "Invalid input");
+                            break;
+                    }
+                }
+            }
         }
-
     }
 }
